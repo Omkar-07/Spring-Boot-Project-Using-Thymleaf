@@ -6,6 +6,8 @@ The Property Manager is a Spring Boot application designed to simplify property 
 ![image alt](https://github.com/Omkar-07/Spring-Boot-Project-Using-Thymleaf/blob/2d0bd4f61034339f7962e9926d249126c49dca86/Images/web%20app%20image%201.png)
 ![image alt](https://github.com/Omkar-07/Spring-Boot-Project-Using-Thymleaf/blob/2d0bd4f61034339f7962e9926d249126c49dca86/Images/web%20app%20image%202.png)
 ![image alt](https://github.com/Omkar-07/Spring-Boot-Project-Using-Thymleaf/blob/2d0bd4f61034339f7962e9926d249126c49dca86/Images/web%20app%20image%203.png)
+![image alt](https://github.com/Omkar-07/Spring-Boot-Project-Using-Thymleaf/blob/73d2c240e77ed408702d04c3902f400d8b3e31ff/Images/web%20app%20image%20add.png)
+![image alt](https://github.com/Omkar-07/Spring-Boot-Project-Using-Thymleaf/blob/73d2c240e77ed408702d04c3902f400d8b3e31ff/Images/web%20app%20image%20editpage.png)
 
 ## Features
 - Property management functionality
