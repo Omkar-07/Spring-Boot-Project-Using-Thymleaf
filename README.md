@@ -83,6 +83,7 @@ Key dependencies included in `pom.xml`:
 - **Spring Boot Starter Data JPA**: For database interaction
 - **H2 Database** (optional): Embedded database for testing
 - **Lombok**: Simplifies Java code with annotations (e.g., `@Getter`, `@Setter`)
+- **Spring Boot Starter Validation**: Provides support for data validation annotations (e.g., `@NotNull`, `@Size`).
 
 ## Documentation
 For additional details, refer to:
