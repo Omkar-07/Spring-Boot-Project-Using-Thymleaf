@@ -109,8 +109,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
-                    <input type="text" id="status" th:field="*{status}" class="form-control" required>
-                    <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="text-danger"></span>
+                    <select id="status" th:field="*{status}" class="form-select" required>
+                        <option value="">-- Select Status --</option>
+                        <option value="available">Available</option>
+                        <option value="sold">Sold</option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('status')}" class="text-danger" th:errors="*{status}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="imageUrl" class="form-label">Image URL</label>
