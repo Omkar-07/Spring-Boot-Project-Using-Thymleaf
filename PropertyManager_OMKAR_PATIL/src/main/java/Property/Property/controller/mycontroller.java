@@ -5,6 +5,8 @@ import Property.Property.service.serviceIMPL;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,4 +71,19 @@ public class mycontroller {
     public String about() {
         return "aboutpage"; 
     }
+    
+    @GetMapping(PropertyRoutes.SEARCH_BAR)
+    public String searchProperties(@RequestParam("keyword") String keyword, Model model) {
+        List<Property> properties = ps.searchProperties(keyword);
+        model.addAttribute("propertyList", properties);
+        model.addAttribute("keyword", keyword);
+        return "propertyHome";
+    }
+    
+	/*
+	 * @GetMapping("/home") public String home(Model model) { List<Property>
+	 * allProperties = ps.getAllProperties(); model.addAttribute("propertyList",
+	 * allProperties); model.addAttribute("keyword", ""); return "propertyHome"; }
+	 */
+    
 }

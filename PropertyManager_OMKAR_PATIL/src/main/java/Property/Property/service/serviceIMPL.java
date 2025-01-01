@@ -30,4 +30,8 @@ public class serviceIMPL {
     public Property saveProperty(Property property) {
         return repo.save(property);
     }
+    
+    public List<Property> searchProperties(String keyword) {
+        return repo.searchByKeyword(keyword);
+    }
 }

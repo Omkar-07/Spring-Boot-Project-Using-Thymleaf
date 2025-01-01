@@ -108,6 +108,45 @@
 		margin-bottom: 15px;
 	}
 }
+.search-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+/* Style the input field */
+.search-form-container input[type="text"] {
+    width: 300px; /* Adjust the width */
+    padding: 10px 15px;
+    border: 2px solid #007BFF;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-form-container input[type="text"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Style the submit button */
+.search-form-container button[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    border: 2px solid #007BFF;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.search-form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
 </style>
 </head>
 <body>
@@ -137,6 +176,18 @@
 		<h1>Rental Property Manager</h1>
 		<p>Manage your rental properties efficiently</p>
 	</div>
+	
+<!-- 	<form action="/properties/search" method="get">
+        <input type="text" name="keyword" placeholder="Search by name or location" th:value="${keyword != null ? keyword : ''}">
+        <button type="submit">Search</button>
+    </form> -->
+    <div class="search-form-container">
+    <form action="/properties/search" method="get">
+        <input type="text" name="keyword" placeholder="Search by name or location" th:value="${keyword != null ? keyword : ''}">
+        <button type="submit">Search</button>
+    </form>
+</div>
+    
 
 
 	<div class="container mt-4">
