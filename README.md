@@ -1,7 +1,7 @@
 # Property Finder(LiveEase)
 
 ## Overview
-The Property Manager is a Spring Boot application designed to simplify property management tasks such as tracking property details, managing tenants, and handling related operations 
+The LiveEase is a Spring Boot application designed to simplify property management tasks such as tracking property details, managing tenants, and handling related operations 
 
 ## Features
 🔹 Admin Functionalities
