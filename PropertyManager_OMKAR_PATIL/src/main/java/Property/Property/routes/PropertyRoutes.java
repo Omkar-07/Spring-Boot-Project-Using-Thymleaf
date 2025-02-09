@@ -7,7 +7,7 @@ public class PropertyRoutes {
     public static final String SAVE_PROPERTY = "/save";
     public static final String UPDATE_PROPERTY = "/update/{id}";
     public static final String DELETE_PROPERTY = "/delete/{id}";
-    public static final String ABOUT_PAGE = "/aboutpage";
+    public static final String ABOUT_PAGE = "/user/aboutpage";
     public static final String SEARCH_BAR = "/search";
     
 }

@@ -3,17 +3,18 @@ package Property.Property.service;
 
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Property.Property.entity.Property;
-import Property.Property.jpa.ProperyRepository;
+import Property.Property.jpa.PropertyRepository;
 
 @Service
-public class serviceIMPL {
+public class PropertyService {
 
     @Autowired
-    private ProperyRepository repo;
+    private PropertyRepository repo;
 
     public List<Property> getAllProperties() {
         return repo.findAll();

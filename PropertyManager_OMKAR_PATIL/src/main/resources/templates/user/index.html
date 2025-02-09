@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore Properties</title>
+
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css">
+
+<style>
+.header-section {
+	color: white;
+	padding: 2.5rem 0;
+	text-align: center;
+}
+
+/* Search Form */
+.search-form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.search-form-container input {
+	width: 300px;
+	padding: 10px 15px;
+	border: 2px solid #28a745;
+	border-radius: 5px 0 0 5px;
+	outline: none;
+}
+
+.search-form-container button {
+	background-color: #28a745;
+	color: white;
+	border: 2px solid #28a745;
+	border-radius: 0 5px 5px 0;
+	padding: 10px 20px;
+}
+
+.search-form-container button:hover {
+	background-color: #1e7e34;
+}
+
+/* Card Styling */
+.card {
+	border: none;
+	border-radius: 15px;
+	overflow: hidden;
+	transition: transform 0.3s;
+}
+
+.card:hover {
+	transform: scale(1.05);
+}
+
+.card img {
+	max-height: 200px; /* Set a maximum height */
+	width: 100%; /* Make the image take the full width of the card */
+	object-fit: cover; /* Maintain aspect ratio and cover the area */
+}
+
+/* Testimonials */
+.testimonial {
+	background: #f8f9fa;
+	padding: 15px;
+	border-radius: 8px;
+	text-align: center;
+}
+
+/* Newsletter */
+.newsletter {
+	text-align: center;
+	background: #28a745;
+	color: white;
+	padding: 20px;
+	margin-top: 30px;
+}
+
+.newsletter input {
+	padding: 10px;
+	width: 250px;
+}
+
+.newsletter button {
+	background: white;
+	color: #28a745;
+	padding: 10px 15px;
+}
+
+/* Footer */
+.footer {
+	background: #343a40;
+	color: white;
+	text-align: center;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#"><i
+				class="fa-solid fa-house fa-beat fa-2xl"
+				style="color: #fafafa; margin-right: 10px"></i>LiveEase </a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/user/home}">Home</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/user/properties}">Properties</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/user/buy}">Buy</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/user/rent}">Rent</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/user/home/contact}">Contact</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/user/home/about}">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="header-section">
+		<div class="overlay"></div>
+		<div class="header-content">
+			<h1 class="mainh">Find Your Dream Home</h1>
+			<p class="mainp">Explore, buy, or rent properties with ease</p>
+		</div>
+	</div>
+
+
+
+	<!-- Search Bar -->
+	<div class="search-form-container">
+		<form action="/user/search" method="get">
+			<input type="text" name="keyword" placeholder="Search properties..."
+				th:value="${keyword != null ? keyword : ''}">
+			<button type="submit">
+				<i class="fas fa-search"></i> Search
+			</button>
+		</form>
+	</div>
+
+	<!-- Property Filter -->
+	<div class="container mt-4">
+		<label for="category">Filter by Property Type:</label> <select
+			id="category" class="form-select"
+			onchange="filterProperties(this.value)">
+			<option value="all">All</option>
+			<option value="house">House</option>
+			<option value="apartment">Apartment</option>
+			<option value="villa">Villa</option>
+		</select>
+	</div>
+
+	<!-- All Properties -->
+	<div class="container mt-5">
+		<h2 class="text-center">Properties</h2>
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="col" th:each="property : ${propertyList}">
+				<div class="card h-100">
+					<img th:src="${property.imageUrl}" class="card-img-top"
+						th:alt="${property.name}">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${property.name}">Property
+							Name</h5>
+						<p class="card-text">
+							<strong>Location:</strong> <span th:text="${property.location}">Location</span><br>
+							<strong>Price:</strong> ₹<span th:text="${property.price}">Price</span>/month<br>
+							<strong>Type:</strong> <span th:text="${property.type}">Type</span><br>
+							<strong>Status:</strong> <span th:text="${property.status}">Status</span><br>
+							<strong>Description:</strong> <span
+								th:text="${property.description}">Description</span>
+						</p>
+					</div>
+					<div class="card-footer d-flex justify-content-between">
+						<button class="btn btn-success btn-sm"
+							th:onclick="buyProperty([[${property.id}]])">Buy</button>
+						<button class="btn btn-primary btn-sm"
+							th:onclick="rentProperty([[${property.id}]])">Rent</button>
+						<a
+							th:href="@{/user/reviews/{propertyId}(propertyId=${property.id})}"
+							class="btn btn-info btn-sm">View Reviews</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Testimonials -->
+	<div class="container mt-5">
+		<h2 class="text-center">What Our Customers Say</h2>
+		<div class="row justify-content-center">
+			<div class="col-md-3">
+				<div class="testimonial">
+					<p>"इथे घर नाही, स्वप्न पूर्ण होतात!"</p>
+					<h6>Omkar Patil</h6>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="testimonial">
+					<p>"Ekdum tension-free process, ghar mil gaya bina kisi
+						jhanjhat ke!"</p>
+					<h6>- Priya Mehta</h6>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="testimonial">
+					<p>"Yahan sirf property nahi, ek naya home milta hai!"</p>
+					<h6>- Aarav Patel</h6>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="testimonial">
+					<p>"Fastest property search, ekdum mast experience!"</p>
+					<h6>- Sneha Reddy</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Newsletter Subscription -->
+	<div class="newsletter">
+		<h3>Subscribe to Our Newsletter</h3>
+		<form action="/user/subscribe" method="post">
+			<input type="email" name="email" placeholder="Enter your email"
+				required>
+			<button type="submit">Subscribe</button>
+		</form>
+	</div>
+
+	<!-- Footer Section -->
+	<footer class="bg-light text-dark mt-5">
+		<div class="container py-4">
+			<div class="row">
+				<!-- More from Our Network -->
+				<div class="col-md-3">
+					<h5>More from our Network</h5>
+					<p>
+						<a href="#">Times Now</a> | <a href="#">ET Now</a>
+					</p>
+				</div>
+
+				<!-- Properties in India -->
+				<div class="col-md-3">
+					<h5>Properties in India</h5>
+					<p>
+						<a href="#">New Delhi</a> | <a href="#">Mumbai</a> | <a href="#">Chennai</a>
+						| <a href="#">Pune</a> | <a href="#">Noida</a> | <a href="#">Gurgaon</a>
+						| <a href="#">Bangalore</a> | <a href="#">Ahmedabad</a>
+					</p>
+				</div>
+
+				<!-- New Projects in India -->
+				<div class="col-md-3">
+					<h5>New Projects in India</h5>
+					<p>
+						<a href="#">New Delhi</a> | <a href="#">Mumbai</a> | <a href="#">Chennai</a>
+						| <a href="#">Pune</a> | <a href="#">Noida</a> | <a href="#">Gurgaon</a>
+						| <a href="#">Bangalore</a> | <a href="#">Ahmedabad</a>
+					</p>
+				</div>
+
+				<!-- Social Media & Apps -->
+				<div class="col-md-3">
+					<h5>Get Our App</h5>
+					<a href="#"><i class="fa-brands fa-google-play fa-2xl"
+						style="color: #0a0812; margin-right: 10px;"></i></a> <a href="#"><i
+						class="fa-brands fa-app-store fa-2xl" style="color: #0f0f10;"></i></a>
+
+					<h5 class="mt-3">Follow Us</h5>
+					<a href="#" class="me-2"><i class="fab fa-facebook"></i></a> <a
+						href="#" class="me-2"><i class="fab fa-x-twitter"></i></a> <a
+						href="#" class="me-2"><i class="fab fa-linkedin"></i></a> <a
+						href="#" class="me-2"><i class="fab fa-youtube"></i></a> <a
+						href="#"><i class="fab fa-instagram"></i></a>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="text-center">
+				<a href="#">Sitemap</a> | <a href="#">Terms & Conditions</a> | <a
+					href="#">Privacy Policy</a> | <a href="#">Whistle Blower Policy</a>
+				| <a href="#">Blog</a> | <a href="#">Careers</a> | <a href="#">Testimonials</a>
+				| <a href="#">Unsubscribe</a> | <a href="#">Help Center</a> | <a
+					href="#">Sales Enquiry</a> | <a href="#">Buy Our Services</a>
+			</div>
+
+			<p class="mt-3 text-center text-muted">Disclaimer: This website
+				only provides a platform for property listings. It does not
+				participate in any transactions between buyers and sellers.</p>
+
+			<p class="text-center text-muted">All trademarks, logos, and
+				names are properties of their respective owners. &copy; 2025 Explore
+				Homes. All Rights Reserved.</p>
+		</div>
+	</footer>
+
+
+
+
+	<!-- JavaScript -->
+	<script>
+		function buyProperty() {
+			alert("Redirecting to Buy Property page...");
+			window.location.href = "/buy";
+		}
+
+		function rentProperty() {
+			alert("Redirecting to Rent Property page...");
+			window.location.href = "/rent";
+		}
+
+		function filterProperties() {
+			let category = document.getElementById("category").value;
+			if (category === "all") {
+				
+				window.location.href = "/user/home";
+			} else {
+				
+				window.location.href = "/user/filter?type=" + category;
+			}
+			window.location.href = "/user/filter?type=" + category;
+		}
+	</script>
+	<!-- FontAwesome -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

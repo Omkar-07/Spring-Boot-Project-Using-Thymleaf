@@ -13,7 +13,10 @@ import Property.Property.entity.Property;
 
 
 @Repository
-public interface ProperyRepository extends JpaRepository<Property, Integer> {
+public interface PropertyRepository extends JpaRepository<Property, Integer> {
 	@Query("SELECT p FROM Property p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(p.location) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Property> searchByKeyword(@Param("keyword") String keyword);
+	List<Property> findByType(String type);
+
+	
 }

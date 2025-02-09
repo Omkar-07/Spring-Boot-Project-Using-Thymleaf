@@ -1,21 +1,30 @@
 package Property.Property.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@ToString(exclude = "reviews") // Prevents infinite loop
 @Table(name = "properties")
-@Data 
 @NoArgsConstructor
 @AllArgsConstructor 
 public class Property {
@@ -47,7 +56,9 @@ public class Property {
 
     @Size(max = 1024, message = "Image URL cannot exceed 1024 characters")
     private String imageUrl;
-
+    
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<Review> reviews;
 	
 }
 
