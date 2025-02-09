@@ -10,9 +10,14 @@ The Property Manager is a Spring Boot application designed to simplify property 
 ![image alt](https://github.com/Omkar-07/Spring-Boot-Project-Using-Thymleaf/blob/73d2c240e77ed408702d04c3902f400d8b3e31ff/Images/web%20app%20image%20editpage.png)
 
 ## Features
-- Property management functionality
-- Tenant and rental management
-- Database integration using Spring Data JPA
+🔹 Admin Functionalities
+- Add, update, and delete property listings
+- Manage property details, images, and availability
+
+🔹 User Functionalities 
+- View property listings with images, prices, and descriptions
+- Filter properties based on type (House, Apartment, Villa, etc.)
+- Contact property managers via a dynamic form
 
 ## Technologies Used
 - **Java**: Core programming language
